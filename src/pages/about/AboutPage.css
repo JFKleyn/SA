@@ -1,85 +1,497 @@
 @import url("https://fonts.googleapis.com/css2?family=Baskervville&display=swap");
-.sa-about { --about-ink:#454545; --about-muted:#686868; --about-line:#dedede; background:#fff; color:var(--about-ink); font:18px/1.7 'Baskervville',Georgia,serif; }
-.sa-about * { box-sizing:border-box; }
-.sa-about h1,.sa-about h2,.sa-about h3,.sa-about p { margin:0; }
-.sa-about h1,.sa-about h2,.sa-about h3 { font-weight:400; line-height:1.12; }
-.sa-about em { font-weight:400; color:#7a7a7a; }
-.sa-about a { color:inherit; text-decoration:none; }
-.sa-about a:focus-visible { outline:2px solid #555; outline-offset:6px; }
-.sa-about svg { width:20px; height:20px; stroke:currentColor; stroke-width:1.3; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
-.sa-about .sa-about-eyebrow { font:11px/1.7 Arial,sans-serif; letter-spacing:2.2px; color:#626262; }
-.sa-about-container { max-width:1440px; margin-inline:auto; }
-.sa-about-hero { padding:clamp(48px,5vw,80px) clamp(22px,7vw,110px) clamp(64px,7vw,112px); background:linear-gradient(120deg,#fff 45%,#f6f6f6); }
-.sa-about-hero-inner { max-width:1440px; margin-inline:auto; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:center; gap:clamp(40px,7vw,110px); }
-.sa-about-hero h1 { font-size:clamp(46px,5vw,76px); letter-spacing:-2px; margin:24px 0 30px; text-wrap:balance; }
-.sa-about-name { display:flex; align-items:center; gap:24px; margin-bottom:28px; }
-.sa-about-name span:first-child { font-size:30px; font-style:italic; }
-.sa-about-name span:last-child { font:10px/1.6 Arial,sans-serif; letter-spacing:2px; border-left:1px solid #ccc; padding-left:24px; }
-.sa-about .sa-about-lead { font-size:clamp(22px,2vw,28px); line-height:1.45; margin-bottom:22px; }
-.sa-about-hero-copy>p:not(.sa-about-eyebrow):not(.sa-about-lead) { max-width:540px; color:var(--about-muted); }
-.sa-about-text-link { display:inline-flex; align-items:center; gap:32px; border-bottom:1px solid #aaa; padding:12px 0; margin-top:20px; }
-.sa-about-text-link svg { transition:transform .25s; }
-.sa-about-text-link:hover svg { transform:translateY(3px); }
-.sa-about-portrait { position:relative; margin:0; padding:16px 0 0 16px; min-width:0; }
-.sa-about-portrait::before { content:""; position:absolute; top:0; left:0; right:24px; bottom:42px; background:#eaeaea; }
-.sa-about-portrait-frame { position:relative; }
-.sa-about-portrait img { display:block; width:100%; height:auto; }
-.sa-about-portrait figcaption { position:relative; padding-top:14px; font-size:14px; font-style:italic; color:var(--about-muted); }
-.sa-about h2 { font-size:clamp(36px,3.6vw,54px); letter-spacing:-1.2px; margin-top:22px; text-wrap:balance; }
-.sa-about-split { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(40px,7vw,110px); align-items:start; }
-.sa-about-experience { padding:clamp(64px,7vw,104px) clamp(22px,7vw,110px); background:#f1f1f1; scroll-margin-top:120px; }
-.sa-about-prose { color:var(--about-muted); }
-.sa-about-prose p+p { margin-top:22px; }
-.sa-about-approach { padding:clamp(64px,7vw,104px) clamp(22px,7vw,110px); max-width:1660px; }
-.sa-about-section-heading { margin-bottom:48px; }
-.sa-about-approach-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,96px); }
-.sa-about-approach-grid article { border-top:1px solid var(--about-line); padding-top:30px; }
-.sa-about h3 { font-size:clamp(27px,2.5vw,36px); color:var(--about-ink); margin-bottom:26px; }
-.sa-about-philosophy { padding:clamp(64px,7vw,104px) clamp(22px,7vw,110px); background:#f8f8f8; }
-.sa-about .sa-about-values { margin-top:32px; color:var(--about-muted); line-height:1.9; font-size:18px; }
-.sa-about-invitation { padding:clamp(64px,6vw,96px) 24px; text-align:center; background:radial-gradient(ellipse at 50% 30%,#fff,#efefef); border-top:1px solid #e5e5e5; }
-.sa-about-invitation h2 { margin:22px 0; }
-.sa-about-invitation p:not(.sa-about-eyebrow) { color:var(--about-muted); margin-bottom:28px; }
-.sa-about-button { display:inline-flex; align-items:center; gap:28px; padding:17px 28px; min-height:56px; background:#555; color:#fff!important; transition:background .25s,transform .25s; }
-.sa-about-button svg { transition:transform .25s; }
-.sa-about-button:hover { background:#444; transform:translateY(-2px); }
-.sa-about-button:hover svg { transform:translateX(4px); }
-.sa-about [data-about-reveal] { opacity:1; transform:none; transition:opacity .75s ease,transform .9s cubic-bezier(.16,1,.3,1); }
-.sa-about [data-about-reveal="pending"] { opacity:0; transform:translateY(22px); }
-@media(max-width:1000px) { .sa-about-hero-inner { gap:36px; } .sa-about-hero h1 { font-size:clamp(40px,5.2vw,58px); } .sa-about-split { gap:40px; } }
-@media(max-width:760px) {
-  .sa-about { font-size:17px; }
-  .sa-about-hero-inner,.sa-about-split,.sa-about-approach-grid { grid-template-columns:1fr; gap:36px; }
-  .sa-about-hero h1 { font-size:clamp(38px,7.8vw,56px); letter-spacing:-1.2px; }
-  .sa-about-portrait { max-width:430px; width:100%; margin-inline:auto; }
-  .sa-about h2 { font-size:clamp(34px,7vw,46px); }
-  .sa-about-section-heading { margin-bottom:32px; }
-  .sa-about-approach-grid article { padding-top:24px; }
-  .sa-about .sa-about-values { margin-top:24px; }
+.sa-about {
+  --about-ink: #454545;
+  --about-muted: #686868;
+  --about-line: #dedede;
+  background: #fff;
+  color: var(--about-ink);
+  font:
+    18px/1.7 "Baskervville",
+    Georgia,
+    serif;
 }
-@media(max-width:380px) { .sa-about-hero h1 { font-size:36px; } .sa-about-name { gap:16px; } .sa-about-name span:last-child { padding-left:16px; letter-spacing:1.4px; } }
-@media(prefers-reduced-motion:reduce) { .sa-about [data-about-reveal],.sa-about [data-about-reveal="pending"] { opacity:1; transform:none; transition:none; } .sa-about a,.sa-about svg { transition:none; } }
+.sa-about * {
+  box-sizing: border-box;
+}
+.sa-about h1,
+.sa-about h2,
+.sa-about h3,
+.sa-about p {
+  margin: 0;
+}
+.sa-about h1,
+.sa-about h2,
+.sa-about h3 {
+  font-weight: 400;
+  line-height: 1.12;
+}
+.sa-about em {
+  font-weight: 400;
+  color: #7a7a7a;
+}
+.sa-about a {
+  color: inherit;
+  text-decoration: none;
+}
+.sa-about a:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 6px;
+}
+.sa-about svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.sa-about .sa-about-eyebrow {
+  font:
+    11px/1.7 Arial,
+    sans-serif;
+  letter-spacing: 2.2px;
+  color: #626262;
+}
+.sa-about-container {
+  max-width: 1440px;
+  margin-inline: auto;
+}
+.sa-about-hero {
+  padding: clamp(48px, 5vw, 80px) clamp(22px, 7vw, 110px)
+    clamp(64px, 7vw, 112px);
+  background: linear-gradient(120deg, #fff 45%, #f6f6f6);
+}
+.sa-about-hero-inner {
+  max-width: 1440px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(40px, 7vw, 110px);
+}
+.sa-about-hero h1 {
+  font-size: clamp(46px, 5vw, 76px);
+  letter-spacing: -2px;
+  margin: 24px 0 30px;
+  text-wrap: balance;
+}
+.sa-about-name {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+.sa-about-name span:first-child {
+  font-size: 30px;
+  font-style: italic;
+}
+.sa-about-name span:last-child {
+  font:
+    10px/1.6 Arial,
+    sans-serif;
+  letter-spacing: 2px;
+  border-left: 1px solid #ccc;
+  padding-left: 24px;
+}
+.sa-about .sa-about-lead {
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.45;
+  margin-bottom: 22px;
+}
+.sa-about-hero-copy > p:not(.sa-about-eyebrow):not(.sa-about-lead) {
+  max-width: 540px;
+  color: var(--about-muted);
+}
+.sa-about-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 32px;
+  border-bottom: 1px solid #aaa;
+  padding: 12px 0;
+  margin-top: 20px;
+}
+.sa-about-text-link svg {
+  transition: transform 0.25s;
+}
+.sa-about-text-link:hover svg {
+  transform: translateY(3px);
+}
+.sa-about-portrait {
+  position: relative;
+  margin: 0;
+  padding: 16px 0 0 16px;
+  min-width: 0;
+}
+.sa-about-portrait::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 24px;
+  bottom: 42px;
+  background: #eaeaea;
+}
+.sa-about-portrait-frame {
+  position: relative;
+}
+.sa-about-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.sa-about-portrait figcaption {
+  position: relative;
+  padding-top: 14px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--about-muted);
+}
+.sa-about h2 {
+  font-size: clamp(36px, 3.6vw, 54px);
+  letter-spacing: -1.2px;
+  margin-top: 22px;
+  text-wrap: balance;
+}
+.sa-about-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 110px);
+  align-items: start;
+}
+.sa-about-experience {
+  padding: clamp(64px, 7vw, 104px) clamp(22px, 7vw, 110px);
+  background: #f1f1f1;
+  scroll-margin-top: 120px;
+}
+.sa-about-prose {
+  color: var(--about-muted);
+}
+.sa-about-prose p + p {
+  margin-top: 22px;
+}
+.sa-about-approach {
+  padding: clamp(64px, 7vw, 104px) clamp(22px, 7vw, 110px);
+  max-width: 1660px;
+}
+.sa-about-section-heading {
+  margin-bottom: 48px;
+}
+.sa-about-approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 6vw, 96px);
+}
+.sa-about-approach-grid article {
+  border-top: 1px solid var(--about-line);
+  padding-top: 30px;
+}
+.sa-about h3 {
+  font-size: clamp(27px, 2.5vw, 36px);
+  color: var(--about-ink);
+  margin-bottom: 26px;
+}
+.sa-about-philosophy {
+  padding: clamp(64px, 7vw, 104px) clamp(22px, 7vw, 110px);
+  background: #f8f8f8;
+}
+.sa-about .sa-about-values {
+  margin-top: 32px;
+  color: var(--about-muted);
+  line-height: 1.9;
+  font-size: 18px;
+}
+.sa-about-invitation {
+  padding: clamp(64px, 6vw, 96px) 24px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 30%, #fff, #efefef);
+  border-top: 1px solid #e5e5e5;
+}
+.sa-about-invitation h2 {
+  margin: 22px 0;
+}
+.sa-about-invitation p:not(.sa-about-eyebrow) {
+  color: var(--about-muted);
+  margin-bottom: 28px;
+}
+.sa-about-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 17px 28px;
+  min-height: 56px;
+  background: #555;
+  color: #fff !important;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.sa-about-button svg {
+  transition: transform 0.25s;
+}
+.sa-about-button:hover {
+  background: #444;
+  transform: translateY(-2px);
+}
+.sa-about-button:hover svg {
+  transform: translateX(4px);
+}
+.sa-about [data-about-reveal] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.75s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sa-about [data-about-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(22px);
+}
+@media (max-width: 1000px) {
+  .sa-about-hero-inner {
+    gap: 36px;
+  }
+  .sa-about-hero h1 {
+    font-size: clamp(40px, 5.2vw, 58px);
+  }
+  .sa-about-split {
+    gap: 40px;
+  }
+}
+@media (max-width: 760px) {
+  .sa-about {
+    font-size: 17px;
+  }
+  .sa-about-hero-inner,
+  .sa-about-split,
+  .sa-about-approach-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .sa-about-hero h1 {
+    font-size: clamp(38px, 7.8vw, 56px);
+    letter-spacing: -1.2px;
+  }
+  .sa-about-portrait {
+    max-width: 430px;
+    width: 100%;
+    margin-inline: auto;
+  }
+  .sa-about h2 {
+    font-size: clamp(34px, 7vw, 46px);
+  }
+  .sa-about-section-heading {
+    margin-bottom: 32px;
+  }
+  .sa-about-approach-grid article {
+    padding-top: 24px;
+  }
+  .sa-about .sa-about-values {
+    margin-top: 24px;
+  }
+}
+@media (max-width: 380px) {
+  .sa-about-hero h1 {
+    font-size: 36px;
+  }
+  .sa-about-name {
+    gap: 16px;
+  }
+  .sa-about-name span:last-child {
+    padding-left: 16px;
+    letter-spacing: 1.4px;
+  }
+}
+
 
 /* Alternating stories, with headings kept beside their copy */
-.sa-about-story-layout { display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr); align-items:center; gap:clamp(36px,5vw,76px); max-width:1280px; }
-.sa-about-story-philosophy { grid-template-columns:minmax(0,1.22fr) minmax(0,.78fr); }
-.sa-about-story-copy { min-width:0; }
-.sa-about-story-copy h2 { font-size:clamp(34px,3.1vw,48px); margin:20px 0 28px; }
-.sa-about-story-copy .sa-about-prose { max-width:640px; }
-.sa-about-experience,.sa-about-philosophy { padding-block:clamp(60px,6vw,88px); }
-.sa-about-detail-photo { position:relative; margin:0; min-width:0; width:100%; max-width:420px; }
-.sa-about-detail-photo img { position:relative; display:block; width:100%; height:auto; }
-.sa-about-detail-photo figcaption { position:relative; color:var(--about-muted); font-size:14px; font-style:italic; padding-top:12px; }
-.sa-about-microphone-photo { padding:14px 0 0 14px; }
-.sa-about-microphone-photo::before { content:""; position:absolute; top:0; bottom:42px; left:0; right:18px; border:1px solid #ccc; }
-.sa-about-notebook-photo { justify-self:end; padding:14px 14px 0 0; }
-.sa-about-notebook-photo::before { content:""; position:absolute; top:0; bottom:42px; left:18px; right:0; background:#eaeaea; }
-.sa-about .sa-about-story-copy .sa-about-values { margin:0 0 24px; padding-bottom:20px; border-bottom:1px solid var(--about-line); font-size:17px; line-height:1.8; }
-.sa-about-invitation { position:relative; isolation:isolate; overflow:hidden; }
-.sa-about-invitation::before { content:""; position:absolute; inset:0; z-index:-1; background-image:linear-gradient(#ffffffdc,#ffffffdc),var(--about-music-backdrop); background-size:cover; background-position:center; }
-@media(max-width:900px) {
-  .sa-about-story-layout,.sa-about-story-philosophy { grid-template-columns:1fr; gap:32px; max-width:640px; }
-  .sa-about-story-experience .sa-about-story-copy { grid-row:1; }
-  .sa-about-detail-photo { max-width:360px; justify-self:center; }
-  .sa-about-story-copy h2 { font-size:clamp(34px,6vw,46px); }
+.sa-about-story-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  align-items: center;
+  gap: clamp(36px, 5vw, 76px);
+  max-width: 1280px;
+}
+.sa-about-story-philosophy {
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+}
+.sa-about-story-copy {
+  min-width: 0;
+}
+.sa-about-story-copy h2 {
+  font-size: clamp(34px, 3.1vw, 48px);
+  margin: 20px 0 28px;
+}
+.sa-about-story-copy .sa-about-prose {
+  max-width: 640px;
+}
+.sa-about-experience,
+.sa-about-philosophy {
+  padding-block: clamp(60px, 6vw, 88px);
+}
+.sa-about-detail-photo {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+  width: 100%;
+  max-width: 420px;
+}
+.sa-about-detail-photo img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.sa-about-detail-photo figcaption {
+  position: relative;
+  color: var(--about-muted);
+  font-size: 14px;
+  font-style: italic;
+  padding-top: 12px;
+}
+.sa-about-microphone-photo {
+  padding: 14px 0 0 14px;
+}
+.sa-about-microphone-photo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 42px;
+  left: 0;
+  right: 18px;
+  border: 1px solid #ccc;
+}
+.sa-about-notebook-photo {
+  justify-self: end;
+  padding: 14px 14px 0 0;
+}
+.sa-about-notebook-photo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 42px;
+  left: 18px;
+  right: 0;
+  background: #eaeaea;
+}
+.sa-about .sa-about-story-copy .sa-about-values {
+  margin: 0 0 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--about-line);
+  font-size: 17px;
+  line-height: 1.8;
+}
+.sa-about-invitation {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.sa-about-invitation::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(#ffffffdc, #ffffffdc), var(--about-music-backdrop);
+  background-size: cover;
+  background-position: center;
+}
+@media (max-width: 900px) {
+  .sa-about-story-layout,
+  .sa-about-story-philosophy {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    max-width: 640px;
+  }
+  .sa-about-story-experience .sa-about-story-copy {
+    grid-row: 1;
+  }
+  .sa-about-detail-photo {
+    max-width: 360px;
+    justify-self: center;
+  }
+  .sa-about-story-copy h2 {
+    font-size: clamp(34px, 6vw, 46px);
+  }
+}
+
+/* Individual reveals: natural reading order, with no long waiting delays. */
+.sa-about [data-about-reveal] {
+  transition: opacity 750ms ease, transform 950ms cubic-bezier(.16,1,.3,1);
+}
+.sa-about [data-about-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.sa-about figure[data-about-reveal="pending"] {
+  transform: translateY(32px);
+}
+.sa-about [data-about-reveal="visible"] { opacity: 1; transform: none; }
+.sa-about-hero h1[data-about-reveal] { transition-delay: 60ms; }
+.sa-about-name[data-about-reveal] { transition-delay: 110ms; }
+.sa-about-portrait[data-about-reveal] { transition-delay: 100ms; }
+.sa-about-portrait-frame, .sa-about-detail-frame { overflow: hidden; position: relative; }
+.sa-about :is(.sa-about-portrait-frame, .sa-about-detail-frame) img {
+  transition: transform 1100ms cubic-bezier(.2,.8,.2,1);
+}
+.sa-about .sa-about-text-link {
+  position: relative;
+  transition: opacity 750ms ease, transform 950ms cubic-bezier(.16,1,.3,1), border-color 250ms ease;
+}
+.sa-about-text-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: #454545;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms ease;
+}
+/* Button uses a separate inner hover effect, leaving reveal transforms intact. */
+.sa-about .sa-about-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition: opacity 750ms ease, transform 950ms cubic-bezier(.16,1,.3,1),
+    background 280ms ease, box-shadow 350ms ease;
+}
+.sa-about-button::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, #ffffff16 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 650ms ease;
+}
+.sa-about .sa-about-button[data-about-reveal="visible"]:focus-visible {
+  background: #444;
+  box-shadow: 0 9px 20px #45454518;
+}
+.sa-about-button:focus-visible::after { transform: translateX(120%); }
+.sa-about-button:focus-visible svg { transform: translateX(4px); }
+.sa-about-text-link:focus-visible::after { transform: scaleX(1); }
+.sa-about-text-link:focus-visible svg { transform: translateY(3px); }
+@media (hover: hover) and (pointer: fine) {
+  .sa-about :is(.sa-about-portrait, .sa-about-detail-photo):hover img { transform: scale(1.025); }
+  .sa-about .sa-about-button[data-about-reveal="visible"]:hover {
+    transform: translateY(-3px);
+    background: #444;
+    box-shadow: 0 9px 20px #45454518;
+    transition-duration: 750ms, 350ms, 280ms, 350ms;
+  }
+  .sa-about-button:hover::after { transform: translateX(120%); }
+  .sa-about-text-link:hover::after { transform: scaleX(1); }
+}
+.sa-about .sa-about-button[data-about-reveal="visible"]:active { transform: scale(.985); box-shadow: none; }
+@media (hover: none) {
+  .sa-about .sa-about-button[data-about-reveal="visible"]:hover { transform: none; }
+  .sa-about .sa-about-button[data-about-reveal="visible"]:active { transform: scale(.985); }
+}
+@media (max-width: 760px) {
+  .sa-about [data-about-reveal] { transition-delay: 0ms; }
+  .sa-about [data-about-reveal="pending"] { transform: translateY(18px); }
 }

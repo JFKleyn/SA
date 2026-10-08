@@ -1,10 +1,48 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import "./ContactPage.css";
 
 export function ContactPage() {
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
   const submitting = useRef(false);
+  const pageRef = useRef(null);
+  useLayoutEffect(() => {
+    const page = pageRef.current;
+    if (!page || typeof IntersectionObserver === "undefined") return undefined;
+    const elements = [...page.querySelectorAll("[data-contact-reveal]")];
+    let firstFrame;
+    let secondFrame;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.dataset.contactReveal = "visible";
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
+    const onFocus = (event) => {
+      const target = event.target.closest("[data-contact-reveal]");
+      if (target) { target.dataset.contactReveal = "visible"; observer.unobserve(target); }
+    };
+    page.addEventListener("focusin", onFocus);
+    const showAll = () => {
+      observer.disconnect();
+      elements.forEach((element) => { element.dataset.contactReveal = "visible"; });
+    };
+    elements.forEach((element) => { element.dataset.contactReveal = "pending"; });
+    // Give the hidden starting position a paint before observing the new page.
+    firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
+        elements.forEach((element) => observer.observe(element));
+      });
+    });
+    return () => {
+      page.removeEventListener("focusin", onFocus);
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+      showAll();
+    };
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -41,28 +79,28 @@ export function ContactPage() {
   }
 
   return (
-    <main id="main" className="sa-contact" tabIndex={-1}>
+    <main ref={pageRef} id="main" className="sa-contact" tabIndex={-1}>
       <section className="sa-contact-layout" aria-labelledby="contact-title">
         <div className="sa-contact-intro">
-          <p className="sa-contact-eyebrow">
+          <p data-contact-reveal className="sa-contact-eyebrow">
             A little hello. A world of possibility.
           </p>
-          <h1 id="contact-title">
+          <h1 data-contact-reveal id="contact-title">
             Your next chapter
             <br />
             <em>starts here.</em>
           </h1>
-          <p className="sa-contact-lead">
+          <p data-contact-reveal className="sa-contact-lead">
             A first lesson. A new ambition. A voice waiting to be heard.
           </p>
-          <p className="sa-contact-description">
+          <p data-contact-reveal className="sa-contact-description">
             Whether you’re interested in singing, piano or performing arts, we’d
             love to hear from you. Tell us a little about yourself and what
             you’d like to explore.
           </p>
           <div className="sa-contact-details">
             <div>
-              <h2>Let’s talk</h2>
+              <h2 data-contact-reveal>Let’s talk</h2>
               <a href="tel:+27767768331">+27 76 776 8331</a>
               <a href="mailto:studio.amberleigh@gmail.com">
                 studio.amberleigh@gmail.com
@@ -77,8 +115,8 @@ export function ContactPage() {
               </a>
             </div>
             <div>
-              <h2>Find us in Hillcrest</h2>
-              <address>
+              <h2 data-contact-reveal>Find us in Hillcrest</h2>
+              <address data-contact-reveal>
                 Strangeways Office Park
                 <br />6 Delamore Road, Hillcrest
                 <br />
@@ -94,23 +132,23 @@ export function ContactPage() {
               </a>
             </div>
           </div>
-          <p className="sa-contact-signoff">
+          <p data-contact-reveal className="sa-contact-signoff">
             A space for your voice. A place for your potential.
           </p>
         </div>
 
         <div className="sa-contact-form-panel">
-          <p className="sa-contact-eyebrow">Let’s begin</p>
-          <h2>
+          <p data-contact-reveal className="sa-contact-eyebrow">Let’s begin</p>
+          <h2 data-contact-reveal>
             Get in contact <em>with us.</em>
           </h2>
-          <p className="sa-contact-form-note">All fields are required.</p>
+          <p data-contact-reveal className="sa-contact-form-note">All fields are required.</p>
           <form
             onSubmit={handleSubmit}
             className="sa-contact-form"
             aria-busy={status === "sending"}
           >
-            <div className="sa-contact-field">
+            <div data-contact-reveal className="sa-contact-field">
               <label htmlFor="contact-firstname">First name</label>
               <input
                 id="contact-firstname"
@@ -120,7 +158,7 @@ export function ContactPage() {
                 required
               />
             </div>
-            <div className="sa-contact-field">
+            <div data-contact-reveal className="sa-contact-field">
               <label htmlFor="contact-lastname">Surname</label>
               <input
                 id="contact-lastname"
@@ -130,7 +168,7 @@ export function ContactPage() {
                 required
               />
             </div>
-            <div className="sa-contact-field">
+            <div data-contact-reveal className="sa-contact-field">
               <label htmlFor="contact-email">Email</label>
               <input
                 id="contact-email"
@@ -141,7 +179,7 @@ export function ContactPage() {
                 required
               />
             </div>
-            <div className="sa-contact-field">
+            <div data-contact-reveal className="sa-contact-field">
               <label htmlFor="contact-number">Number</label>
               <input
                 id="contact-number"
@@ -152,7 +190,7 @@ export function ContactPage() {
                 required
               />
             </div>
-            <div className="sa-contact-field sa-contact-field-wide">
+            <div data-contact-reveal className="sa-contact-field sa-contact-field-wide">
               <label htmlFor="contact-message">Message</label>
               <textarea
                 id="contact-message"
@@ -172,7 +210,7 @@ export function ContactPage() {
                 autoComplete="off"
               />
             </div>
-            <div className="sa-contact-submit-row">
+            <div data-contact-reveal className="sa-contact-submit-row">
               <span>Your next step, in your own words.</span>
               <button type="submit" disabled={status === "sending"}>
                 {status === "sending" ? "Sending…" : "Send your message"}
@@ -200,7 +238,7 @@ export function ContactPage() {
           </form>
         </div>
       </section>
-      <div className="sa-contact-endnote" aria-hidden="true">
+      <div data-contact-reveal className="sa-contact-endnote" aria-hidden="true">
         <span>Singing</span>
         <i>✧</i>
         <span>Piano</span>

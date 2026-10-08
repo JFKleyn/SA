@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./GalleryPage.css";
 
@@ -42,35 +42,35 @@ export function GalleryPage() {
     setActive((index) => (index - 1 + photos.length) % photos.length);
   const next = () => setActive((index) => (index + 1) % photos.length);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const page = pageRef.current;
-    if (
-      !page ||
-      typeof IntersectionObserver === "undefined" ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    )
-      return undefined;
-    const elements = page.querySelectorAll("[data-gallery-reveal]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.dataset.galleryReveal = "visible";
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.06 },
-    );
-    elements.forEach((element) => {
-      element.dataset.galleryReveal = "pending";
-      observer.observe(element);
+    if (!page || typeof IntersectionObserver === "undefined") return undefined;
+    const elements = [...page.querySelectorAll("[data-gallery-reveal]")];
+    let firstFrame;
+    let secondFrame;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.dataset.galleryReveal = "visible";
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: "0px 0px -20px 0px" });
+    const showAll = () => {
+      observer.disconnect();
+      elements.forEach((element) => { element.dataset.galleryReveal = "visible"; });
+    };
+    elements.forEach((element) => { element.dataset.galleryReveal = "pending"; });
+    // Give the hidden starting position a paint before observing the new page.
+    firstFrame = requestAnimationFrame(() => {
+      secondFrame = requestAnimationFrame(() => {
+        elements.forEach((element) => observer.observe(element));
+      });
     });
     return () => {
-      observer.disconnect();
-      elements.forEach((element) => {
-        element.dataset.galleryReveal = "visible";
-      });
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+      showAll();
     };
   }, []);
 
@@ -95,19 +95,19 @@ export function GalleryPage() {
   return (
     <main id="main" className="sa-gallery" ref={pageRef} tabIndex={-1}>
       <section className="sa-gallery-intro" aria-labelledby="gallery-title">
-        <div data-gallery-reveal>
-          <p className="sa-gallery-eyebrow">LIFE AT STUDIO AMBERLEIGH</p>
-          <h1 id="gallery-title">
+        <div>
+          <p data-gallery-reveal className="sa-gallery-eyebrow">LIFE AT STUDIO AMBERLEIGH</p>
+          <h1 data-gallery-reveal id="gallery-title">
             Small beginnings.
             <br />
             <em>Unforgettable moments.</em>
           </h1>
         </div>
-        <div className="sa-gallery-intro-copy" data-gallery-reveal>
+        <div className="sa-gallery-intro-copy">
           <span className="sa-gallery-spark" aria-hidden="true">
             ✧
           </span>
-          <p>
+          <p data-gallery-reveal>
             The courage to step forward. The joy of finding your voice. A
             glimpse into the moments we share, on stage and along the way.
           </p>
@@ -123,7 +123,7 @@ export function GalleryPage() {
         aria-label="Studio photo gallery"
       >
         <div className="sa-gallery-collection-top">
-          <p className="sa-gallery-eyebrow">OUR MOMENTS, TOGETHER</p>
+          <p data-gallery-reveal className="sa-gallery-eyebrow">OUR MOMENTS, TOGETHER</p>
           <span>Take a closer look</span>
         </div>
         {photos.length > 0 ? (
@@ -157,9 +157,9 @@ export function GalleryPage() {
             ))}
           </div>
         ) : (
-          <p className="sa-gallery-empty">Our gallery is coming soon.</p>
+          <p data-gallery-reveal className="sa-gallery-empty">Our gallery is coming soon.</p>
         )}
-        <p className="sa-gallery-endnote">
+        <p data-gallery-reveal className="sa-gallery-endnote">
           Every voice has a story. These are a few of ours.
         </p>
       </section>
@@ -168,14 +168,14 @@ export function GalleryPage() {
         className="sa-gallery-invite"
         aria-labelledby="gallery-invite-title"
       >
-        <div data-gallery-reveal>
-          <p className="sa-gallery-eyebrow">YOUR MOMENT IS WAITING</p>
-          <h2 id="gallery-invite-title">
+        <div>
+          <p data-gallery-reveal className="sa-gallery-eyebrow">YOUR MOMENT IS WAITING</p>
+          <h2 data-gallery-reveal id="gallery-invite-title">
             Picture yourself
             <br />
             <em>here.</em>
           </h2>
-          <p>Let’s find the right place for you to begin.</p>
+          <p data-gallery-reveal>Let’s find the right place for you to begin.</p>
           <Link to="/contact" className="sa-gallery-cta">
             Find your voice
             <Arrow />

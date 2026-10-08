@@ -432,14 +432,6 @@
     font-size: 29px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-button {
-    transition: none;
-  }
-  .sa-button:hover {
-    transform: none;
-  }
-}
 .sa-site .sa-monogram {
   position: relative;
   display: block;
@@ -952,14 +944,7 @@
     gap: 9px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-stage *,
-  .sa-stage *:before,
-  .sa-stage *:after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
+
 
 /* Mobile hero refinement: compact, centred and comfortably readable. */
 @media (max-width: 700px) {
@@ -1279,23 +1264,7 @@
     margin-top: 0;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-introduction [data-intro-reveal],
-  .sa-introduction [data-intro-reveal="pending"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .sa-introduction-photo img,
-  .sa-introduction-link,
-  .sa-introduction-link span {
-    transition: none;
-  }
-  .sa-introduction-photo:hover img,
-  .sa-introduction-link:hover span {
-    transform: none;
-  }
-}
+
 
 /* Disciplines — singing leads; piano and performance support. */
 .sa-disciplines {
@@ -1591,22 +1560,7 @@
     aspect-ratio: 4/3;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-disciplines [data-intro-reveal],
-  .sa-disciplines [data-intro-reveal="pending"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .sa-discipline-image img,
-  .sa-discipline-link {
-    transition: none;
-  }
-  .sa-singing-feature:hover img,
-  .sa-discipline-row:hover img {
-    transform: none;
-  }
-}
+
 
 /* Beyond the lesson */
 .sa-beyond {
@@ -1765,18 +1719,7 @@
     padding: 10px 0 0 10px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-beyond [data-intro-reveal],
-  .sa-beyond [data-intro-reveal="pending"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .sa-beyond-gallery,
-  .sa-beyond-gallery svg {
-    transition: none;
-  }
-}
+
 
 /* A quiet final spotlight */
 .sa-invite {
@@ -1908,15 +1851,121 @@
     font-size: 400px;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-invite [data-intro-reveal],
-  .sa-invite [data-intro-reveal="pending"] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+/* Homepage interactions — separate from the existing entrance reveals. */
+.sa-site :is(.sa-stage-button, .sa-invite-button) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  transition: background 280ms ease, border-color 280ms ease,
+    box-shadow 350ms ease, transform 350ms cubic-bezier(.2,.8,.2,1);
+}
+.sa-site :is(.sa-stage-button, .sa-invite-button)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 20%, #ffffff16 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 650ms cubic-bezier(.2,.8,.2,1);
+}
+.sa-site :is(.sa-stage-link, .sa-introduction-link, .sa-discipline-link, .sa-beyond-gallery) {
+  position: relative;
+  transition: color 250ms ease, border-color 250ms ease;
+}
+.sa-site :is(.sa-stage-link, .sa-introduction-link, .sa-discipline-link, .sa-beyond-gallery)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: #454545;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+.sa-site :is(.sa-introduction-link, .sa-discipline-link) > span {
+  display: inline-block;
+  transition: color 300ms ease, transform 450ms cubic-bezier(.2,.8,.2,1);
+}
+.sa-site .sa-stage-scroll {
+  transition: color 250ms ease;
+}
+.sa-site .sa-scroll-line {
+  transition: background 250ms ease;
+}
+
+/* Focus receives the same feedback without requiring a mouse. */
+.sa-site :is(.sa-stage-button, .sa-invite-button):focus-visible {
+  background: #454545;
+  border-color: #454545;
+  transform: translateY(-3px);
+  box-shadow: 0 9px 20px #45454518;
+}
+.sa-site :is(.sa-stage-button, .sa-invite-button):focus-visible::after {
+  transform: translateX(120%);
+}
+.sa-site :is(.sa-stage-link, .sa-introduction-link, .sa-discipline-link, .sa-beyond-gallery):focus-visible::after {
+  transform: scaleX(1);
+}
+.sa-site :is(.sa-introduction-link, .sa-discipline-link):focus-visible > span {
+  color: #454545;
+  transform: translateX(3px) rotate(45deg);
+}
+.sa-site .sa-beyond-gallery:focus-visible svg { transform: translate(3px, -3px); }
+.sa-site .sa-invite-button:focus-visible svg { transform: translateX(4px); }
+
+@media (hover: hover) and (pointer: fine) {
+  .sa-site :is(.sa-stage-button, .sa-invite-button):hover {
+    background: #454545;
+    border-color: #454545;
+    transform: translateY(-3px);
+    box-shadow: 0 9px 20px #45454518;
   }
-  .sa-invite-button,
-  .sa-invite-button svg {
-    transition: none;
+  .sa-site :is(.sa-stage-button, .sa-invite-button):hover::after {
+    transform: translateX(120%);
   }
+  .sa-site :is(.sa-stage-link, .sa-introduction-link, .sa-discipline-link, .sa-beyond-gallery):hover::after {
+    transform: scaleX(1);
+  }
+  .sa-site :is(.sa-introduction-link, .sa-discipline-link):hover > span {
+    color: #454545;
+    transform: translateX(3px) rotate(45deg);
+  }
+  .sa-site .sa-stage-scroll:hover { color: #353535; }
+  .sa-site .sa-stage-scroll:hover .sa-scroll-line { background: #353535; }
+}
+/* Touch interaction stays brief and does not leave a lifted button behind. */
+.sa-site :is(.sa-stage-button, .sa-invite-button):active {
+  transform: translateY(0) scale(.985);
+  box-shadow: none;
+}
+.sa-site :is(.sa-stage-link, .sa-introduction-link, .sa-discipline-link, .sa-beyond-gallery):active::after {
+  transform: scaleX(1);
+}
+@media (hover: none) {
+  .sa-site :is(.sa-stage-button, .sa-invite-button):hover { transform: none; }
+  .sa-site :is(.sa-stage-button, .sa-invite-button):active { transform: scale(.985); }
+}
+
+
+/* Individual scroll reveals, matching the About page. Hero animations stay intact. */
+.sa-site [data-intro-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 750ms ease, transform 950ms cubic-bezier(.16,1,.3,1);
+}
+.sa-site [data-intro-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.sa-site :is(figure, .sa-discipline-image)[data-intro-reveal="pending"] {
+  transform: translateY(32px);
+}
+.sa-site [data-intro-reveal="visible"] { opacity: 1; transform: none; }
+@media (max-width: 700px) {
+  .sa-site [data-intro-reveal="pending"] { transform: translateY(18px); }
 }

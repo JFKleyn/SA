@@ -297,8 +297,73 @@
     flex-wrap: wrap;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .sa-contact * {
-    transition: none !important;
-  }
+
+
+/* Individual reveals initialized before paint, matching the other pages. */
+.sa-contact [data-contact-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 750ms ease, transform 950ms cubic-bezier(.16,1,.3,1);
+}
+.sa-contact [data-contact-reveal="pending"] { opacity: 0; transform: translateY(24px); }
+.sa-contact [data-contact-reveal="visible"] { opacity: 1; transform: none; }
+.sa-contact h1[data-contact-reveal] { transition-delay: 60ms; }
+.sa-contact-field:focus-within { opacity: 1; transform: none; }
+.sa-contact-field label { transition: color 250ms ease; }
+.sa-contact-field:focus-within label { color: #353532; }
+.sa-contact-field :is(input, textarea) { transition: background 250ms ease, border-color 250ms ease, box-shadow 250ms ease; }
+.sa-contact-field :is(input, textarea):focus { border-color: #555550; box-shadow: 0 3px 0 #55555010; }
+.sa-contact-details a { position: relative; transition: color 250ms ease; }
+.sa-contact-details a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: #50504e;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms ease;
+}
+.sa-contact-text-link span { display: inline-block; transition: transform 300ms ease; }
+.sa-contact-details a:focus-visible::after { transform: scaleX(1); }
+.sa-contact-text-link:focus-visible span { transform: translate(3px,-3px); }
+.sa-contact-submit-row button {
+  position: relative;
+  overflow: hidden;
+  transition: background 280ms ease, box-shadow 350ms ease, transform 350ms cubic-bezier(.2,.8,.2,1);
+}
+.sa-contact-submit-row button::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, #ffffff16 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 650ms ease;
+}
+.sa-contact-submit-row button span { display: inline-block; transition: transform 300ms ease; }
+.sa-contact-submit-row button:focus-visible:not(:disabled) { background: #42423e; transform: translateY(-3px); box-shadow: 0 9px 20px #45454518; }
+.sa-contact-submit-row button:focus-visible:not(:disabled)::after { transform: translateX(120%); }
+.sa-contact-submit-row button:focus-visible:not(:disabled) span { transform: translate(3px,-3px); }
+.sa-contact-submit-row button:disabled span { animation: sa-contact-sending 1200ms ease-in-out infinite; }
+.sa-contact-status p { animation: sa-contact-feedback 350ms ease both; }
+@keyframes sa-contact-feedback { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sa-contact-sending { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+@media (hover: hover) and (pointer: fine) {
+  .sa-contact-details a:hover::after { transform: scaleX(1); }
+  .sa-contact-text-link:hover span { transform: translate(3px,-3px); }
+  .sa-contact-submit-row button:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 9px 20px #45454518; }
+  .sa-contact-submit-row button:hover:not(:disabled)::after { transform: translateX(120%); }
+  .sa-contact-submit-row button:hover:not(:disabled) span { transform: translate(3px,-3px); }
+}
+.sa-contact-submit-row button:active:not(:disabled) { transform: scale(.985); box-shadow: none; }
+@media (hover: none) {
+  .sa-contact-submit-row button:hover:not(:disabled) { transform: none; }
+  .sa-contact-submit-row button:active:not(:disabled) { transform: scale(.985); }
+}
+@media (max-width: 540px) {
+  .sa-contact [data-contact-reveal] { transition-delay: 0ms; }
+  .sa-contact [data-contact-reveal="pending"] { transform: translateY(18px); }
 }
