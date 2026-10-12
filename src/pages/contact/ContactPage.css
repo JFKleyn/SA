@@ -387,3 +387,31 @@
   .sa-contact-text-link:hover .sa-contact-arrow,
   .sa-contact-submit-row button:hover:not(:disabled) .sa-contact-arrow { transform: none; }
 }
+
+/* Submit button: stable, predictable interaction on touch and desktop. */
+.sa-contact-submit-row button {
+  transform: none;
+  box-shadow: none;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 200ms ease;
+}
+.sa-contact-submit-row button::after { display: none; }
+.sa-contact-submit-row button .sa-contact-arrow { transition: none; transform: none; }
+.sa-contact-submit-row button:hover:not(:disabled),
+.sa-contact-submit-row button:focus-visible:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+  background: #42423e;
+}
+.sa-contact-submit-row button:hover:not(:disabled) .sa-contact-arrow,
+.sa-contact-submit-row button:focus-visible:not(:disabled) .sa-contact-arrow {
+  transform: none;
+}
+.sa-contact-submit-row button:active:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+}
+@media (hover: none) {
+  .sa-contact-submit-row button:hover:not(:disabled) { background: #555550; }
+}
