@@ -367,3 +367,23 @@
   .sa-contact [data-contact-reveal] { transition-delay: 0ms; }
   .sa-contact [data-contact-reveal="pending"] { transform: translateY(18px); }
 }
+
+/* Consistent vector arrows on iOS, Android and desktop. */
+.sa-contact-arrow {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  overflow: visible;
+  transition: transform 300ms ease;
+}
+.sa-contact-text-link:hover .sa-contact-arrow,
+.sa-contact-text-link:focus-visible .sa-contact-arrow,
+.sa-contact-submit-row button:hover:not(:disabled) .sa-contact-arrow,
+.sa-contact-submit-row button:focus-visible:not(:disabled) .sa-contact-arrow {
+  transform: translate(3px, -3px);
+}
+@media (hover: none) {
+  .sa-contact-text-link:hover .sa-contact-arrow,
+  .sa-contact-submit-row button:hover:not(:disabled) .sa-contact-arrow { transform: none; }
+}

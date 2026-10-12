@@ -111,7 +111,7 @@ export function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Say hello on WhatsApp <span aria-hidden="true">↗</span>
+                Say hello on WhatsApp <svg className="sa-contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M7 5h12v12" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </a>
             </div>
             <div>
@@ -128,7 +128,7 @@ export function ContactPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Get directions <span aria-hidden="true">↗</span>
+                Get directions <svg className="sa-contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M7 5h12v12" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </a>
             </div>
           </div>
@@ -214,7 +214,7 @@ export function ContactPage() {
               <span>Your next step, in your own words.</span>
               <button type="submit" disabled={status === "sending"}>
                 {status === "sending" ? "Sending…" : "Send your message"}
-                <span aria-hidden="true">↗</span>
+                <svg className="sa-contact-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 19 19 5M7 5h12v12" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </button>
             </div>
             <div
