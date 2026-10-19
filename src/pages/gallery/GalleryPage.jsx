@@ -98,9 +98,9 @@ export function GalleryPage() {
         <div>
           <p data-gallery-reveal className="sa-gallery-eyebrow">LIFE AT STUDIO AMBERLEIGH</p>
           <h1 data-gallery-reveal id="gallery-title">
-            Small beginnings.
+            Moments in the spotlight.
             <br />
-            <em>Unforgettable moments.</em>
+            <em>Memories beyond the stage.</em>
           </h1>
         </div>
         <div className="sa-gallery-intro-copy">
@@ -177,7 +177,7 @@ export function GalleryPage() {
           </h2>
           <p data-gallery-reveal>Let’s find the right place for you to begin.</p>
           <Link to="/contact" className="sa-gallery-cta">
-            Find your voice
+            Unlock your potential
             <Arrow />
           </Link>
         </div>

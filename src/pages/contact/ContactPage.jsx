@@ -94,7 +94,7 @@ export function ContactPage() {
             A first lesson. A new ambition. A voice waiting to be heard.
           </p>
           <p data-contact-reveal className="sa-contact-description">
-            Whether you’re interested in singing, piano or performing arts, we’d
+            Whether you’re interested in Singing, Piano or Performing Arts, we’d
             love to hear from you. Tell us a little about yourself and what
             you’d like to explore.
           </p>
